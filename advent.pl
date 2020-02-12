@@ -12,6 +12,8 @@ my $player = {
     alive    => 1,
 };
 
+bless $player, 'Game::Player';
+
 my @objects = (
     {
         name     => 'dragon',
@@ -30,8 +32,8 @@ my @objects = (
 
 my %object_by_name = map { $_->{name} => $_ } @objects;
 
-while ( $player->{alive} ) {
-    say "You are here: $player->{location}";
+while ( $player->alive ) {
+    say "You are here: ", $player->location;
     print "What do you want to do? ";
 
     my $sentence = readline();
@@ -59,7 +61,7 @@ sub look {
 
     my @obj_here =
         map { $_->{name} }
-        grep { $_->{location} eq $player->{location} } @objects;
+        grep { $_->{location} eq $player->location } @objects;
 
     if (@obj_here) {
         say join( "; ", @obj_here );
@@ -74,7 +76,7 @@ sub take {
     my $object = $object_by_name{$obj_name};
 
     return if !$object;
-    return if $object->{location} ne $player->{location};
+    return if $object->{location} ne $player->location;
     return if $object->{alive};
 
     $object->{location} = 'PLAYER';
@@ -87,7 +89,7 @@ sub slay {
     my $object = $object_by_name{$obj_name};
 
     return if !$object;
-    return if $object->{location} ne $player->{location};
+    return if $object->{location} ne $player->location;
     return if !$object->{alive};
 
     if ( $object_by_name{sword}->{location} ne 'PLAYER' ) {
