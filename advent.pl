@@ -39,9 +39,25 @@ while ( $player->{alive} ) {
     if ( $verb eq 'quit' ) {
         say "Bye!";
         exit;
+    } elsif ( $verb eq 'look' ) {
+        look();
     } else {
         say "I don't understand what you want to do!";
     }
 
     say "";
+}
+
+sub look {
+    say "I see here:";
+
+    my @obj_here =
+        map { $_->{name} }
+        grep { $_->{location} eq $player->{location} } @objects;
+
+    if (@obj_here) {
+        say join( "; ", @obj_here );
+    } else {
+        say "Nothing special.";
+    }
 }
