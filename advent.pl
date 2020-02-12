@@ -7,7 +7,7 @@ use feature 'say';
 
 use Data::Dumper;
 
-my $player = Game::Player->new(
+my $player = Game::Player::Wizard->new(
     {
         location => 'entrance',
         alive    => 1,
@@ -49,6 +49,8 @@ while ( $player->alive ) {
         take($obj_name);
     } elsif ( $verb eq 'slay' ) {
         slay($obj_name);
+    } elsif ( $verb eq 'magic' ) {
+        $player->magic();
     } else {
         say "I don't understand what you want to do!";
     }
@@ -121,4 +123,12 @@ sub alive {
 sub go_to {
     my ( $self, $new_location ) = @_;
     $self->{location} = $new_location;
+}
+
+package Game::Player::Wizard;
+
+use base 'Game::Player';
+
+sub magic {
+    say "ZAP!!!";
 }
