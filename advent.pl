@@ -7,6 +7,9 @@ use feature 'say';
 
 use Data::Dumper;
 
+use lib './lib';
+use Game::Player::Wizard;
+
 my $player = Game::Player::Wizard->new(
     {
         location => 'entrance',
@@ -101,34 +104,4 @@ sub slay {
 
     $object->{alive} = 0;
     say "You killed it!";
-}
-
-package Game::Player;
-
-sub new {
-    my ( $class, $ref ) = @_;
-    return bless $ref, $class;
-}
-
-sub location {
-    my ($self) = @_;
-    return $self->{location};
-}
-
-sub alive {
-    my ($self) = @_;
-    return $self->{alive};
-}
-
-sub go_to {
-    my ( $self, $new_location ) = @_;
-    $self->{location} = $new_location;
-}
-
-package Game::Player::Wizard;
-
-use base 'Game::Player';
-
-sub magic {
-    say "ZAP!!!";
 }
