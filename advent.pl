@@ -45,6 +45,8 @@ while ( $player->{alive} ) {
         look();
     } elsif ( $verb eq 'take' ) {
         take($obj_name);
+    } elsif ( $verb eq 'slay' ) {
+        slay($obj_name);
     } else {
         say "I don't understand what you want to do!";
     }
@@ -77,4 +79,22 @@ sub take {
 
     $object->{location} = 'PLAYER';
     say "Taken!";
+}
+
+sub slay {
+    my ($obj_name) = @_;
+
+    my $object = $object_by_name{$obj_name};
+
+    return if !$object;
+    return if $object->{location} ne $player->{location};
+    return if !$object->{alive};
+
+    if ( $object_by_name{sword}->{location} ne 'PLAYER' ) {
+        say "With your bare hands???";
+        return;
+    }
+
+    $object->{alive} = 0;
+    say "You killed it!";
 }
