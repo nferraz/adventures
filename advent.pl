@@ -12,6 +12,22 @@ my $player = {
     alive    => 1,
 };
 
+my @objects = (
+    {
+        name     => 'dragon',
+        location => 'entrance',
+        alive    => 1,
+    },
+    {
+        name     => 'sword',
+        location => 'entrance',
+    },
+    {
+        name     => 'stone',
+        location => 'museum',
+    },
+);
+
 while ( $player->{alive} ) {
     say "You are here: $player->{location}";
     print "What do you want to do? ";
