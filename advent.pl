@@ -98,3 +98,20 @@ sub slay {
     $object->{alive} = 0;
     say "You killed it!";
 }
+
+package Game::Player;
+
+sub location {
+    my ($player) = @_;
+    return $player->{location};
+}
+
+sub alive {
+    my ($player) = @_;
+    return $player->{alive};
+}
+
+sub go_to {
+    my ( $player, $new_location ) = @_;
+    $player->{location} = $new_location;
+}
