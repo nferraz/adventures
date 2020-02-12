@@ -7,12 +7,12 @@ use feature 'say';
 
 use Data::Dumper;
 
-my $player = {
-    location => 'entrance',
-    alive    => 1,
-};
-
-bless $player, 'Game::Player';
+my $player = Game::Player->new(
+    {
+        location => 'entrance',
+        alive    => 1,
+    }
+);
 
 my @objects = (
     {
@@ -102,6 +102,11 @@ sub slay {
 }
 
 package Game::Player;
+
+sub new {
+    my ( $class, $ref ) = @_;
+    return bless $ref, $class;
+}
 
 sub location {
     my ($player) = @_;
