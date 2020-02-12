@@ -12,4 +12,11 @@ my $player = {
     alive    => 1,
 };
 
-say Dumper $player;
+while ( $player->{alive} ) {
+    say "You are here: $player->{location}";
+    print "What do you want to do? ";
+
+    my $sentence = readline();
+
+    say "";
+}
