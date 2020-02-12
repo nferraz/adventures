@@ -109,16 +109,16 @@ sub new {
 }
 
 sub location {
-    my ($player) = @_;
-    return $player->{location};
+    my ($self) = @_;
+    return $self->{location};
 }
 
 sub alive {
-    my ($player) = @_;
-    return $player->{alive};
+    my ($self) = @_;
+    return $self->{alive};
 }
 
 sub go_to {
-    my ( $player, $new_location ) = @_;
-    $player->{location} = $new_location;
+    my ( $self, $new_location ) = @_;
+    $self->{location} = $new_location;
 }
