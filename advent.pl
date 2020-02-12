@@ -28,6 +28,8 @@ my @objects = (
     },
 );
 
+my %object_by_name = map { $_->{name} => $_ } @objects;
+
 while ( $player->{alive} ) {
     say "You are here: $player->{location}";
     print "What do you want to do? ";
@@ -41,6 +43,8 @@ while ( $player->{alive} ) {
         exit;
     } elsif ( $verb eq 'look' ) {
         look();
+    } elsif ( $verb eq 'take' ) {
+        take($obj_name);
     } else {
         say "I don't understand what you want to do!";
     }
@@ -60,4 +64,17 @@ sub look {
     } else {
         say "Nothing special.";
     }
+}
+
+sub take {
+    my ($obj_name) = @_;
+
+    my $object = $object_by_name{$obj_name};
+
+    return if !$object;
+    return if $object->{location} ne $player->{location};
+    return if $object->{alive};
+
+    $object->{location} = 'PLAYER';
+    say "Taken!";
 }
