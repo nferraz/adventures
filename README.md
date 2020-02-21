@@ -3,7 +3,7 @@ Adventures in Perl
 
 ### 1. Clone the repository
 
-    git clone https://github.com/nelson-ferraz/adventures.git
+    git clone https://github.com/nferraz/adventures.git
     cd adventures
 
 ### 2. List the available tags
